@@ -1,0 +1,11 @@
+{
+  "name": "alternative-boilerplate",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@swc/cli": "^0.1.18",
+    "@swc/core": "^1.0.45",
+    "typescript": "^3.5.3"
+  }
+}

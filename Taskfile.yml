@@ -1,0 +1,29 @@
+# https://taskfile.dev
+
+version: '2'
+
+output: prefixed
+
+vars:
+  PKGM: 
+    sh: if [ -x "$(command -v yarn)" ]; then echo "yarn"; else echo "npm"; fi 
+
+tasks:
+  default:
+    deps:
+      - task: install
+      - task: build
+  install:
+    cmds:
+      - "{{.PKGM}} install"
+  build:
+    deps: [ts-build]
+  ts-build:
+    deps: [ts-check]
+    preconditions:
+      - sh: "[ $? -eq 0 ]"
+    cmds:
+      - "{{.PKGM}} run swc ./src -d ./out"
+  ts-check:
+    cmds:
+      - "{{.PKGM}} run tsc --noEmit --pretty"
